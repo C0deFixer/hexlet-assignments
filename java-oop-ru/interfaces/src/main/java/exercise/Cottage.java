@@ -31,9 +31,9 @@ public class Cottage  implements Home{
     @Override
     public String toString() {
         return florCount +
-                " этажный коттедж площадью" +
+                " этажный коттедж площадью " +
                 area +
-                "метров";
+                " метров";
     }
 }
 // END

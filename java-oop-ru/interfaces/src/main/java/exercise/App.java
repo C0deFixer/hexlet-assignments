@@ -16,16 +16,18 @@ public class App {
         ));
 
         List<String> result = App.buildApartmentsList(apartments, 3);
-        System.out.println(result);
+        result.stream().forEach(System.out::println);
+
 
     }
 
     public static List<String> buildApartmentsList(List<Home> apartments, int count) {
-        List<String> result = Stream.of(apartments)
-                .sorted(Cx,y -> x.compareTo(y))
-                .reduce()
-                .map(Home::toString)
-                .collect(Collectors.toList());
+        List<String> result = apartments.stream()
+                .sorted(Home::compareTo)
+                .map(x -> x.toString())
+                // .peek(System.out::println)
+                .limit(count)
+                .toList();
         return result;
 
     }

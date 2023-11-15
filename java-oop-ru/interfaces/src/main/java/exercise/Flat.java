@@ -34,7 +34,8 @@ public class Flat implements Home {
         return "Квартира площадью " +
                 getArea() +
                 " на " +
-                floor;
+                floor +
+                " этаже";
     }
 }
 // END
