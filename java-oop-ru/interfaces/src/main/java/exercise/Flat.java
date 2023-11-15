@@ -2,9 +2,9 @@ package exercise;
 
 // BEGIN
 public class Flat implements Home {
-      private double area;
-      private double balconyArea;
-      private int floor;
+    private double area;
+    private double balconyArea;
+    private int floor;
 
     public Flat(double area, double balconyArea, int floor) {
         this.area = area;
@@ -20,13 +20,11 @@ public class Flat implements Home {
     @Override
     public int compareTo(Home another) {
         double anotherArea = another.getArea();
-        if ( anotherArea < this.area ) {
+        if (anotherArea < this.area) {
             return 1;
-        }
-        else if ( anotherArea > this.area ) {
+        } else if (anotherArea > this.area) {
             return -1;
-        }
-        else return 0;
+        } else return 0;
     }
 
     @Override
