@@ -19,19 +19,21 @@ public class Cottage implements Home {
     @Override
     public int compareTo(Home another) {
         double anotherArea = another.getArea();
-        if (anotherArea < this.area) {
+        if (anotherArea < this.getArea()) {
             return 1;
-        } else if (anotherArea > this.area) {
+        } else if (anotherArea > this.getArea()) {
             return -1;
-        } else return 0;
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public String toString() {
-        return florCount +
-                " этажный коттедж площадью " +
-                area +
-                " метров";
+        return florCount
+                + " этажный коттедж площадью "
+                + area
+                + " метров";
     }
 }
 // END
