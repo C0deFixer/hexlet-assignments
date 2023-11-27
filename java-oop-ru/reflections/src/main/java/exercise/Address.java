@@ -5,6 +5,7 @@ class Address {
     
     // END
     @NotNull
+    @MinLength()
     private String country;
 
     // BEGIN
