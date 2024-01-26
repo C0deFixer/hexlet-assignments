@@ -13,7 +13,7 @@ public final class App {
             config.plugins.enableDevLogging();
         });
         // Описываем, что загрузится по адресу /
-        app.get("/", ctx -> ctx.result("Hello World"));
+        app.get("/welcome", ctx -> ctx.result("Hello World"));
         return app;
         // END
     }
