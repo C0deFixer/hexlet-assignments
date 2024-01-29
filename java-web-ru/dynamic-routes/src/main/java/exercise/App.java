@@ -30,7 +30,7 @@ public final class App {
                     .filter(x -> x.get("id").equals(id))
                     .findFirst();
             if (company.isEmpty()) {
-                throw new NotFoundResponse("Company not found!");
+                throw new NotFoundResponse("Company not found");
             }
             ctx.json(company.get());
         });
