@@ -20,7 +20,7 @@ class AppTest {
     @BeforeAll
     public static void beforeAll() {
         app = App.getApp();
-        app.start(0);
+        app.start("127.0.0.1",8080);
         int port = app.port();
         baseUrl = "http://localhost:" + port;
     }
@@ -63,7 +63,7 @@ class AppTest {
             .field("firstName", "test")
             .field("lastName", "user")
             .field("email", "  User@gmail.com  ")
-            .field("password", "12345678")
+            .field("password", "12345678").field("passwordConfirmation", "12345678")
             .asEmpty();
 
         assertThat(responsePost.getStatus()).isEqualTo(302);

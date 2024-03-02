@@ -38,11 +38,11 @@ public final class App {
             var lastName = StringUtils.capitalize(ctx.formParam("lastName"));
             var email = ctx.formParamAsClass("email", String.class).getOrDefault("").trim().toLowerCase();
             String password = ctx.formParamAsClass("password",String.class).getOrDefault("").trim();
-            String  passwordConfirmation = ctx.formParamAsClass("passwordConfirmation", String.class).getOrDefault("").trim();
+            String passwordConfirmation = ctx.formParamAsClass("passwordConfirmation", String.class).getOrDefault("").trim();
             if (!password.equals(passwordConfirmation)) {
                 throw new NotFoundResponse("password confirmation was wrong!");
             }
-            UserRepository.save(new User(firstName, lastName, email, password));
+            UserRepository.save(new User(firstName, lastName, email, Security.encrypt(password)));
             ctx.redirect("/users");
         });
         // END
@@ -52,6 +52,6 @@ public final class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(7070);
+        app.start("127.0.0.1",8080);
     }
 }
