@@ -1,12 +1,14 @@
 package exercise.repository;
 
 import java.util.List;
+
 import exercise.model.Post;
 import exercise.util.Generator;
+
 import java.util.Optional;
 
 public class PostRepository {
-    public static final int POSTS_PER_PAGE=5;
+    public static final int POSTS_PER_PAGE = 5;
     private static List<Post> entities = Generator.getPosts();
 
     public static void save(Post post) {

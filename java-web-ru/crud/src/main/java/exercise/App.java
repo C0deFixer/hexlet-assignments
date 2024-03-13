@@ -18,6 +18,7 @@ public final class App {
         // BEGIN
         app.get(NamedRoutes.postsPath(), PostsController::index);
         app.get(NamedRoutes.showPath(), PostsController::show);
+        //app.get(NamedRoutes.postPath(), PostsController::show);
         app.post(NamedRoutes.postsPath(), PostsController::create);
         // END
 
@@ -26,6 +27,6 @@ public final class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(7070);
+        app.start("127.0.0.1", 8080);
     }
 }

@@ -18,13 +18,13 @@ public class PostsController {
 
     // BEGIN
     public static void index(Context ctx) {
-        Integer pageNumber = ctx.formParamAsClass("pageNumber", Integer.class).getOrDefault(1);
-        List<Post> postsList = PostRepository.getEntities().stream().skip((pageNumber - 1) * 5L)
+        Integer pageNumber = ctx.queryParamAsClass("pageNumber", Integer.class).getOrDefault(1);
+        List<Post> postsList = PostRepository.getEntities().stream().sorted((x, y) -> Long.compare(x.getId(), y.getId())).skip((pageNumber - 1) * 5L)
                 .limit(5).toList();
-        int pagesCount = PostRepository.size()%PostRepository.POSTS_PER_PAGE == 0 ? PostRepository.size()/PostRepository.POSTS_PER_PAGE : PostRepository.size()/PostRepository.POSTS_PER_PAGE + 1;
+        int pagesCount = PostRepository.size() % PostRepository.POSTS_PER_PAGE == 0 ? PostRepository.size() / PostRepository.POSTS_PER_PAGE : PostRepository.size() / PostRepository.POSTS_PER_PAGE + 1;
         //c ( PostRepository.size() PostRepository.POSTS_PER_PAGE PostRepository.size()%PostRepository.POSTS_PER_PAGE > 0
-        PostsPage page = new PostsPage(pageNumber,pagesCount,postsList);
-        ctx.render(NamedRoutes.postsPath(),Collections.singletonMap("page",page));
+        PostsPage page = new PostsPage(pageNumber, pagesCount, postsList);
+        ctx.render("posts/index.jte", Collections.singletonMap("page", page));
     }
 
 
@@ -32,35 +32,34 @@ public class PostsController {
 
         try {
             var name = ctx.formParamAsClass("name", String.class)
-                    .check(value -> value.trim().length() > 2 , "Название поста должно быть длиннее двух символов")
+                    .check(value -> value.trim().length() > 2, "Название поста должно быть длиннее двух символов")
                     .check(PostRepository::existsByName, "Пост с таким названием уже существует")
                     .get();
             var body = ctx.formParamAsClass("body", String.class)
-                    .check(value -> value.trim().length() > 10 , "")
+                    .check(value -> value.trim().length() > 10, "")
                     .get();
             Post post = new Post(name, body);
             PostRepository.save(post);
             ctx.redirect(NamedRoutes.postsPath());
-        }
-        catch (ValidationException e) {
+        } catch (ValidationException e) {
             var name = ctx.formParamAsClass("name", String.class)
                     .getOrDefault("");
             var body = ctx.formParamAsClass("body", String.class)
                     .getOrDefault("");
             //Post post = new Post(name, body);
             PostPage page = new PostPage(name, body, e.getErrors());
-            ctx.render(NamedRoutes.postPath(),Collections.singletonMap("page",page));
+            ctx.render("posts/show.jte", Collections.singletonMap("page", page));
         }
 
 
     }
 
-    public static void show (Context ctx) {
+    public static void show(Context ctx) {
         var id = ctx.pathParamAsClass("id", Long.class).get();
         var post = PostRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Page not found"));
         var page = new PostPage(post);
-        ctx.render("users/show.jte", Collections.singletonMap("page", page));
+        ctx.render("posts/show.jte", Collections.singletonMap("page", page));
     }
 
     // END
