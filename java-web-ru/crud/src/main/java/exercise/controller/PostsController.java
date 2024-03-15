@@ -18,8 +18,10 @@ public class PostsController {
 
     // BEGIN
     public static void index(Context ctx) {
-        Integer pageNumber = ctx.queryParamAsClass("pageNumber", Integer.class).getOrDefault(1);
-        List<Post> postsList = PostRepository.getEntities().stream().sorted((x, y) -> Long.compare(x.getId(), y.getId())).skip((pageNumber - 1) * 5L)
+        Integer pageNumber = ctx.queryParamAsClass("page", Integer.class).getOrDefault(1);
+        List<Post> postsList = PostRepository.getEntities().stream()
+                //.sorted((x, y) -> Long.compare(x.getId(), y.getId()))
+                .skip((pageNumber - 1) * 5L)
                 .limit(5).toList();
         int pagesCount = PostRepository.size() % PostRepository.POSTS_PER_PAGE == 0 ? PostRepository.size() / PostRepository.POSTS_PER_PAGE : PostRepository.size() / PostRepository.POSTS_PER_PAGE + 1;
         //c ( PostRepository.size() PostRepository.POSTS_PER_PAGE PostRepository.size()%PostRepository.POSTS_PER_PAGE > 0

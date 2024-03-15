@@ -24,7 +24,7 @@
                 </li>
             @else
                 <li class="page-item active">
-                    <a class="page-link" tabindex="-1" href="${NamedRoutes.postsPath()}?pageNumber=${page.getCurrentPage()-1}">Previous</a>
+                    <a class="page-link" tabindex="-1" href="${NamedRoutes.postsPath()}?page=${page.getCurrentPage()-1}">Previous</a>
                 </li>
             @endif
             @for(var i = 1; i<=  page.getCountPages(); i++)
@@ -34,7 +34,7 @@
                         <a class="page-link" href="#">${i}</a>
                     </li>
                 @else
-                    <li class="page-item"><a class="page-link" href="${NamedRoutes.postsPath()}?pageNumber=${i}">${i}</a></li>
+                    <li class="page-item"><a class="page-link" href="${NamedRoutes.postsPath()}?page=${i}">${i}</a></li>
                 @endif
             @endfor
             @if (page.getCurrentPage() == page.getCountPages())
@@ -43,7 +43,7 @@
                 </li>
             @else
                 <li class="page-item active">
-                    <a class="page-link" tabindex="-1" href="${NamedRoutes.postsPath()}?pageNumber=${page.getCurrentPage()+1}">Next</a>
+                    <a class="page-link" tabindex="-1" href="${NamedRoutes.postsPath()}?page=${page.getCurrentPage()+1}">Next</a>
                 </li>
             @endif
 

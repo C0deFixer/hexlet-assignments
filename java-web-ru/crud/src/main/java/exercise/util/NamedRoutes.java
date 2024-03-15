@@ -8,7 +8,7 @@ public class NamedRoutes {
 
     // BEGIN
     public static String postsPath() {
-        return "/posts/index.jte";
+        return "/posts";
     }
 
     public static String showPath() {
@@ -24,7 +24,7 @@ public class NamedRoutes {
     }
 
     public static String postPath() {
-        return "/posts/show.jte";
+        return "/posts";
     }
 
     // END
