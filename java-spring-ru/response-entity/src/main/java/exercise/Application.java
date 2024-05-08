@@ -53,7 +53,9 @@ public class Application {
 
     @PostMapping (path = "/posts")
     public ResponseEntity<Post> create(@RequestBody Post post) {
-        post.setId(String.valueOf(posts.size() + 1));
+        if (post.getId() == null) {
+            post.setId(String.valueOf(posts.size() + 1));
+        }
         posts.add(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(post);
     }
