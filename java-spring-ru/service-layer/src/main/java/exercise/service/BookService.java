@@ -31,7 +31,10 @@ public class BookService {
     }
 
     public BookDTO getById(Long id) {
-        var book = bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Book with id %s Not found", id)));
+        var book = bookRepository
+                .findById(id)
+                .orElseThrow(()
+                        -> new ResourceNotFoundException(String.format("Book with id %s Not found", id)));
         return bookMapper.map(book);
 
     }
@@ -44,7 +47,10 @@ public class BookService {
     }
 
     public BookDTO update(BookUpdateDTO bookUpdateDTO, Long id) {
-        var bookToUpdate = bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Book with id %s Not found", id)));
+        var bookToUpdate = bookRepository
+                .findById(id)
+                .orElseThrow(()
+                        -> new ResourceNotFoundException(String.format("Book with id %s Not found", id)));
         bookMapper.update(bookUpdateDTO, bookToUpdate);
         validator.validate(bookToUpdate);
         var book = bookRepository.save(bookToUpdate);
@@ -53,7 +59,10 @@ public class BookService {
     }
 
     public void delete(Long id) {
-        var book = bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Book with id %s Not found", id)));
+        var book = bookRepository
+                .findById(id)
+                .orElseThrow(()
+                        -> new ResourceNotFoundException(String.format("Book with id %s Not found", id)));
         bookRepository.deleteById(id);
     }
     // END

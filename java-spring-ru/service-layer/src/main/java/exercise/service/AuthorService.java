@@ -30,7 +30,10 @@ public class AuthorService {
     }
 
     public AuthorDTO getById(Long id) {
-        var author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
+        var author = authorRepository
+                .findById(id)
+                .orElseThrow(()
+                        -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
         return authorMapper.map(author);
 
     }
@@ -43,7 +46,10 @@ public class AuthorService {
     }
 
     public AuthorDTO update(AuthorUpdateDTO authorUpdateDTO, Long id) {
-        var authorToUpdate = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
+        var authorToUpdate = authorRepository
+                .findById(id)
+                .orElseThrow(()
+                        -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
         authorMapper.update(authorUpdateDTO, authorToUpdate);
         validator.validate(authorToUpdate);
         var author = authorRepository.save(authorToUpdate);
@@ -52,7 +58,10 @@ public class AuthorService {
     }
 
     public void delete(Long id) {
-        var author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
+        var author = authorRepository
+                .findById(id)
+                .orElseThrow(()
+                        -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
         authorRepository.deleteById(id);
     }
     // END
