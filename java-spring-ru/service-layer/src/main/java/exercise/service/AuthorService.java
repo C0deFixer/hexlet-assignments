@@ -21,14 +21,16 @@ public class AuthorService {
     @Autowired
     private AuthorMapper authorMapper;
 
-    @Autowired UtilValidator validator;
+    @Autowired
+    UtilValidator validator;
+
     public List<AuthorDTO> getAll() {
         var authors = authorRepository.findAll();
         return authors.stream().map(authorMapper::map).toList();
     }
 
-    public AuthorDTO getById(Long id){
-        var author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found",id)));
+    public AuthorDTO getById(Long id) {
+        var author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
         return authorMapper.map(author);
 
     }
@@ -40,17 +42,17 @@ public class AuthorService {
         return authorMapper.map(author);
     }
 
-    public AuthorDTO update(AuthorUpdateDTO authorUpdateDTO, Long id){
-        var authorToUpdate = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found",id)));
-        authorMapper.update(authorUpdateDTO,authorToUpdate);
+    public AuthorDTO update(AuthorUpdateDTO authorUpdateDTO, Long id) {
+        var authorToUpdate = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
+        authorMapper.update(authorUpdateDTO, authorToUpdate);
         validator.validate(authorToUpdate);
         var author = authorRepository.save(authorToUpdate);
         return authorMapper.map(author);
 
     }
 
-    public void delete(Long id){
-        var author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found",id)));
+    public void delete(Long id) {
+        var author = authorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Author with id %s Not found", id)));
         authorRepository.deleteById(id);
     }
     // END

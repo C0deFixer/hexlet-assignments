@@ -3,7 +3,6 @@ package exercise.service;
 import exercise.dto.BookCreateDTO;
 import exercise.dto.BookDTO;
 import exercise.dto.BookUpdateDTO;
-import exercise.dto.BookDTO;
 import exercise.exception.ResourceNotFoundException;
 
 import exercise.mapper.BookMapper;

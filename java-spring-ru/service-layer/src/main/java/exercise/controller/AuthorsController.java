@@ -38,7 +38,7 @@ public class AuthorsController {
     public ResponseEntity<List<AuthorDTO>> index() {
         List<AuthorDTO> authors = authorService.getAll();
         return ResponseEntity.ok()
-                .header("X-Total-count",String.valueOf(authors.size()))
+                .header("X-Total-count", String.valueOf(authors.size()))
                 .body(authors);
 
     }
@@ -56,7 +56,7 @@ public class AuthorsController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AuthorDTO> create(@RequestBody @Valid AuthorCreateDTO authorCreateDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                        .body(authorService.create(authorCreateDTO));
+                .body(authorService.create(authorCreateDTO));
     }
 
     @PutMapping

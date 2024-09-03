@@ -17,10 +17,10 @@ public class UtilValidator {
 
     public void validate(BaseEntity be) {
         Set<ConstraintViolation<BaseEntity>> violations = validator.validate(be);
-        if(!violations.isEmpty()) {
+        if (!violations.isEmpty()) {
             String errors = violations.stream()
-            .map(ConstraintViolation::getMessage)
-                    .collect(StringBuilder::new, StringBuilder::append,  StringBuilder::append)
+                    .map(ConstraintViolation::getMessage)
+                    .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                     .toString();
             throw new ConstraintViolationException("Error occurred: " + errors, violations);
 
