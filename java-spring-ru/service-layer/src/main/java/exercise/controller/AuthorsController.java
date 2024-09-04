@@ -59,7 +59,7 @@ public class AuthorsController {
                 .body(authorService.create(authorCreateDTO));
     }
 
-    @PutMapping
+    @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<AuthorDTO> update(@PathVariable Long id,
                                             @RequestBody @Valid AuthorUpdateDTO authorUpdateDTO) {
