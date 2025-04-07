@@ -28,7 +28,7 @@ public class DayTimeConfig {
         }*/
 
     @Bean
-    //@Scope("prototype")
+    @Scope("prototype")
     public Daytime getDayTime() {
         System.out.println("*** call  for  getDayTime ***");
         //LocalDateTime time = LocalDateTime.now(ZoneId.of("UTC-"+6));
