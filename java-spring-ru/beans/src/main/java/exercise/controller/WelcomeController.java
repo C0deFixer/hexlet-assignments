@@ -1,6 +1,7 @@
 package exercise.controller;
 
 import exercise.Application;
+import exercise.beanmanager.MyDayTimeManager;
 import exercise.daytime.Day;
 import exercise.daytime.Daytime;
 import exercise.daytime.Night;
@@ -20,27 +21,22 @@ import java.util.Objects;
 class WelcomeController {
 
     @Autowired
-    private Daytime daytime; //should be initialized correctly on request
+    private MyDayTimeManager dayTimeManager;
 
-/*    @Autowired
-    @RequestScope
-    private void setDayTime(Integer hour) {
-            if (hour < 6 || hour > 22) {
-                //return new Night();
-                daytime = new Night();
-            }
-         else  {daytime = new Day();
-         }
-            //else return new Day();
-        }*/
+    //@Autowired
+    //private Daytime daytime; //альтернативное решение через RequestScope
+
+
 
 
     @GetMapping
     public String get() {
+        Daytime daytime =  dayTimeManager.createBean();
         Objects.requireNonNull(daytime,"Bean Datime was not initialized Correctly!");
-        return String.format("It is %s now! Welcome to Spring!", this.daytime.getName());
+        return String.format("It is %s now bean version %s ! Welcome to Spring!", daytime.getName(), daytime.toString());
 
     }
+
 
     @PostConstruct
     public void init() {

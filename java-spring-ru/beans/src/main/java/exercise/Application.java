@@ -13,6 +13,7 @@ import exercise.daytime.Night;
 
 // BEGIN
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.context.annotation.RequestScope;
 // END
 
@@ -24,15 +25,6 @@ public class Application {
     }
 
     // BEGIN
-    @Bean
-    @RequestScope
-    public Daytime getDayTime() {
-        //LocalDateTime time = LocalDateTime.now(ZoneId.of("UTC-"+6));
-        LocalDateTime time = LocalDateTime.now();
-        if (time.getHour() < 6 || time.getHour() > 22) {
-            return new Night();
-        }
-        else return new Day();
-    }
+
     // END
 }
